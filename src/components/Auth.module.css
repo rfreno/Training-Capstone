@@ -1,0 +1,54 @@
+.main {
+  background-image: url("../assets/pushpress.jpg");
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.log_card {
+  background-color: rgba(241, 218, 196, 0.6);
+  width: 500px;
+  height: 250px;
+  color: #161b33;
+  margin-top: 200px;
+  border-radius: 50px;
+  text-align: center;
+  padding: 10px;
+  align-items: center;
+}
+
+.log_content {
+    display: flex;
+    justify-content: center;
+}
+
+.form_input {
+  width:100%;
+  font-size: 15px;
+  height:30px;
+}
+
+.form_btn {
+  background-color: #161b33;
+  font-size: 30px;
+  text-transform: uppercase;
+  border: none;
+  box-shadow: 2px 2px 5px #0d0c1d;
+  color: white;
+  height: 80px;
+  border-radius: 30px;
+}
+
+.register_btn {
+    background-color: #f1dac4;
+    font-size: 15px;
+    font-style: italic;
+    border: none;
+    box-shadow: 2px 2px 5px #0d0c1d;
+    color: #161b33;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 40px;
+}

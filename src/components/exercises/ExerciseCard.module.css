@@ -1,0 +1,69 @@
+/* for Exercises */
+.exercise_display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.sort_bar {
+    width:80%;
+    height:50px;
+    background-color: #A69CAC;
+    margin-left: 10%;
+    margin-top:20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:10px;
+    align-items: center;
+}
+
+.sort_options {
+    display: inline-flex;
+}
+
+.filter_btn {
+    
+}
+
+/* for ExerciseCard - native elements */
+
+img {
+    height:180px;
+    padding:10px;
+    border-radius: 50px;
+}
+
+h3,h4 {
+    text-transform: uppercase;
+    font-family:sans-serif;
+    padding:10px;
+}
+
+/* for ExerciseCard - custom classes */
+
+.full_card {
+    background-color: #161B33;
+    height:400px;
+    width:300px;
+    color:#F1DAC4;
+    text-align: center;
+    padding:10px;
+    margin:20px;
+    border-radius: 50px;
+}
+
+.title_container {
+    height:100px;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.img_container {
+    height:200px;
+}
+
+.detail_container {
+    height:100px;
+}

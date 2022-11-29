@@ -1,0 +1,143 @@
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 200px;
+  font-family: sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: fit-content;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+input,
+textarea {
+  border: 1px solid grey;
+  border-radius: 10px;
+  font-size: 20px;
+  padding-left: 10px;
+  font-style: italic;
+  text-align: start;
+}
+
+textarea {
+  width: 100%;
+}
+
+.submit {
+  background-color: #A69CAC;
+  font-size: 15px;
+  text-transform: capitalize;
+  border:none;
+  box-shadow: 5px 5px black;
+  color:white;
+  height:50px;
+  border-radius: 30px;
+  font-size: larger;
+}
+
+.form_base {
+    background-color: #161B33;
+    display:flex;
+    width:60%;
+    height:500px;
+    color:white;
+    /* padding:50px; */
+    padding-top: 20px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    border-radius: 50px;
+    align-items: center;
+}
+
+.form_layout {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:100%;
+}
+
+.form_right {
+    width:40%;
+    margin-right:5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+.form_left {
+    padding-top: 20%;
+    padding-bottom: 20%;
+    width:50%;
+}
+
+.form_r1{
+    height:50px;
+    width:100%;
+}
+.form_r2{
+    height:50px;
+    width:100%;
+}
+.form_r3{
+    height:200px;
+    width: 100%;
+}
+.form_r4{
+    width:100%;
+    height:50px;
+}
+
+
+
+.work_display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.work_card {
+    background-color: #0D0C1D;
+    width:40%;
+    margin:20px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px grey;
+    padding:10px;
+}
+
+.work_title {
+    color:white;
+    text-align: center;
+}
+
+p {
+  text-transform: lowercase;
+  font-style: italic;
+}
+
+.desc {
+  text-transform: unset;
+  font-style: unset;
+  color:white;
+  margin-top: 10px;
+}
+
+.list {
+  color:white;
+  margin:10px;
+}
+
+.detail_btn {
+  margin:10px;
+
+}
