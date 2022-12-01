@@ -1,46 +1,47 @@
 import { useState, useContext } from "react";
-// import AuthContext from "../store/authContext";
+import AuthContext from "../store/authContext";
 import classes from "./Auth.module.css";
+import axios from 'axios'
 
 const Auth = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [register, setRegister] = useState(true);
 
-  // const authCtx = useContext(AuthContext);
+  const authCtx = useContext(AuthContext);
 
   const submitHandler = (e) => {
-    // const url = 'http://localhost:4005'
+    const url = 'http://localhost:4005'
 
     e.preventDefault();
 
-    console.log("submitHandler called");
-
+    
     const body = {
       username,
       password,
     };
-  };
+    
+    // console.log("submitHandler called");
 
-  //   axios.post(register ? `${url}/register` : `${url}/login`, body)
-  //     .then((res) => {
-  //       authCtx.login(res.data.token, res.data.exp, res.data.userId)
-  //     })
-  //     .catch((error) => {
-  //       console.log('error', error)
-  //       setUsername("");
-  //       setPassword("");
-  //     });
+    axios.post(register ? `${url}/register` : `${url}/login`, body)
+      .then((res) => {
+        authCtx.login(res.data.token, res.data.exp, res.data.userId)
+      })
+      .catch((error) => {
+        console.log('error in post', error)
+        setUsername("");
+        setPassword("");
+      });
+    }
 
-  // };
 
   return (
     <div className={classes.main}>
       <div className={classes.log_card}>
         <h2>WELCOME BACK!</h2>
         <div className={classes.log_content}>
-          <form>
-            {/* onSubmit={submitHandler}> */}
+          <form
+            onSubmit={submitHandler}>
             <input
               className={classes.form_input}
               type="text"
