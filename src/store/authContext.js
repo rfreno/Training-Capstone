@@ -28,14 +28,11 @@ const getLocalData = () => {
     return null
   }
 
-
   return {
     token: storedToken,
     duration: remainingTime,
   }
 }
-
-
 
 export const AuthContextProvider = (props) => {
   const localData = getLocalData()

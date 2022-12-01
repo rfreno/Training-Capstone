@@ -5,7 +5,7 @@ import classes from "./ExerciseCard.module.css";
 let allExercises = require('../../db/db_ex.json')
 
 const Exercises = () => {
-  const [grid, setGrid] = useState();
+  // const [grid, setGrid] = useState();
   
   const exercisesShown = allExercises.exercises
     .map((exercise) => {

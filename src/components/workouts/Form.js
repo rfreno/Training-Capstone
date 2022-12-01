@@ -33,7 +33,7 @@ const Form = () => {
     setQuantity("");
   };
 
-  const showIngredients = ingredients.map((item) => {
+  const showExercises = ingredients.map((item) => {
     return (
       <li>
         {item.quantity} {item.name}

@@ -15,16 +15,14 @@ const Auth = () => {
 
     e.preventDefault();
 
-    
     const body = {
       username,
       password,
     };
     
-    // console.log("submitHandler called");
-
-    axios.post(register ? `${url}/register` : `${url}/login`, body)
+    axios.post((register ? `${url}/register` : `${url}/login`), body)
       .then((res) => {
+        console.log(res.data)
         authCtx.login(res.data.token, res.data.exp, res.data.userId)
       })
       .catch((error) => {

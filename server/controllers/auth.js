@@ -13,6 +13,7 @@ module.exports = {
   login: async (req, res) => {
     console.log('login called')
     try {
+      console.log(req.body)
       const { username, password } = req.body
       let existingUser = await User.findOne({where: {username}})
 
@@ -44,6 +45,7 @@ module.exports = {
     console.log('register called')
     try {
       const { username, password } = req.body
+      await User.sync({force: true});
       let existingUser = await User.findOne({where: {username}})
 
       if (existingUser) {
@@ -54,9 +56,9 @@ module.exports = {
 
         const newUser = await User.create({username:username, hashedPass:hash})
         const token = createToken(newUser.dataValues.username, newUser.dataValues.id)
-
+    
         const exp = Date.now() + 1000*60*60*48
-
+        
         res.status(200).send({
           username: newUser.dataValues.username,
           userId: newUser.dataValues.id,

@@ -19,9 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path='/exercises' element={<Exercises />} />
         <Route path='/auth' element={authCtx.token ? <Navigate to='/'/> : <Auth/> }/>
-        <Route path='/form' element={<Form/>}/>
+        <Route path='/form' element={authCtx.token ? <Form/> : <Navigate to='/auth'/>}/>
         <Route path='/profile' element={<Profile/>}/>
-        <Route path='/auth' element={<Auth />}/>
+        <Route path='*' element={<Home />} />
       </Routes>
     </div>
   );
