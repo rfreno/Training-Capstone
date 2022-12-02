@@ -21,10 +21,15 @@ Workout.belongsTo(User);
 app.post("/register", register);
 app.post("/login", login);
 
-// app.get("/workouts", getAllWorkouts)
+app.get("/workouts", getAllWorkouts);
 
-// app.post("/workouts", isAuthenticated, addWorkout)
+app.post("/workouts", isAuthenticated, addWorkout);
 
-app.listen(SERVER_PORT, () =>
-  console.log(`server listening at ${SERVER_PORT}`)
-);
+sequelize
+  .sync()
+  .then(() => {
+    app.listen(SERVER_PORT, () =>
+      console.log(`server listening at ${SERVER_PORT}`)
+    );
+  })
+  .catch((e) => console.log(e));

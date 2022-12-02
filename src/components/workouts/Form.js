@@ -1,39 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import classes from "./Workouts.module.css";
 import { Formik } from "formik";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../store/authContext";
 
 const Form = () => {
+  const { token, userId } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const [exercises, setExercises] = useState([]);
-  const [name, setName] = useState("");
+  const [ex, setEx] = useState("");
   const [sets, setSets] = useState("");
   const [reps, setReps] = useState("");
+  const [name, setTitle] = useState("");
+
+  const url = "http://localhost:4005";
 
   const initialValues = {
     type: "",
-    workoutNmae: "",
+    name: "",
     description: "",
-    exercises: []
+    exercises: [],
+    userId
   };
 
   const onSubmit = (values, { resetForm }) => {
     values.exercises = exercises;
-    console.log(values);
+    console.log('onsub', values.exercises)
+    console.log('onsub', exercises)
     resetForm({ values: "" });
-    // axios
-    // .post(`https://recipes.devmountain.com/recipes`, values)
+    axios
+      .post(`${url}/workouts`, values, {
+        headers: {
+          authorization: token,
+        },
+      })
+      .then(navigate(`${url}/`));
   };
 
   const addExercise = () => {
-    setIngredients([...ingredients, { name, quantity }]);
-    setName("");
-    setQuantity("");
+    console.log(exercises)
+    setExercises([...exercises, `${ex} - sets ${sets} of ${reps} reps`]);
+    console.log(exercises, { ex, sets, reps })
+    setEx("");
+    setSets("");
+    setReps("");
   };
 
-  const showExercises = ingredients.map((item) => {
+  const showExercises = exercises.map((item) => {
     return (
       <li>
-        {item.quantity} {item.name}
+        {item.ex} - {item.sets} sets of {item.reps} reps
       </li>
     );
   });
@@ -54,8 +72,8 @@ const Form = () => {
                   <input
                     type="text"
                     placeholder="workout name"
-                    name="workoutName"
-                    value={values.workoutName}
+                    name="name"
+                    value={values.name}
                     onChange={handleChange}
                     className={classes.form_r2}
                   ></input>
@@ -76,13 +94,31 @@ const Form = () => {
                   <div>
                     <input
                       type="text"
-                      placeholder="search for exercises"
+                      placeholder="Add exercises"
                       name="exercise"
-                      onChange={(evt) => setName(evt.target.value)}
+                      onChange={(evt) => setEx(evt.target.value)}
                       className={classes.form_r4}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Sets"
+                      name="sets"
+                      onChange={(evt) => setSets(evt.target.value)}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Reps"
+                      name="reps"
+                      onChange={(evt) => setReps(evt.target.value)}
                     ></input>
                   </div>
                 </div>
+                <button
+                  type="button"
+                  onClick={addExercise}
+                >
+                  Add Exercise
+                </button>
 
                 <button className={classes.submit} type="submit">
                   SAVE WORKOUT
@@ -94,14 +130,14 @@ const Form = () => {
                 Add Exercise
               </button> */}
               <div className={classes.form_left}>
-                <textarea
+                {/* <textarea
                   placeholder="Exercises added will show here"
                   name="instructions"
                   rows={20}
                   value={values.instructions}
                   onChange={handleChange}
-                />
-                {/* <ul>{showExercises}</ul> */}
+                /> */}
+                <ul>{showExercises}</ul>
               </div>
             </form>
           )}

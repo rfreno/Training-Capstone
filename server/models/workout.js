@@ -11,6 +11,6 @@ module.exports = {
         },
         name: DataTypes.STRING,
         description: DataTypes.TEXT,
-        exercises: DataTypes.TEXT,
+        exercises: DataTypes.ARRAY(DataTypes.TEXT),
     })
 }
