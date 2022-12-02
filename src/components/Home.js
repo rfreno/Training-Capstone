@@ -43,7 +43,6 @@ const DUMMY_DATA = [
 ];
 
 const Home = () => {
-  // axios.post('http://localhost:4094/seed', 'seed')
 
   const workoutsShown = DUMMY_DATA.map((workout) => {
     return <WorkoutCard workout={workout} />;

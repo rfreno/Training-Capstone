@@ -4,23 +4,20 @@ import { Formik } from "formik";
 import axios from "axios";
 
 const Form = () => {
-  const [ingredients, setIngredients] = useState([]);
+  const [exercises, setExercises] = useState([]);
   const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [sets, setSets] = useState("");
+  const [reps, setReps] = useState("");
 
   const initialValues = {
     type: "",
-    recipeName: "",
-    imageURL: "",
-    prepTime: "",
-    cookTime: "",
-    serves: "",
-    ingredients: [],
-    instructions: "",
+    workoutNmae: "",
+    description: "",
+    exercises: []
   };
 
   const onSubmit = (values, { resetForm }) => {
-    values.ingredients = ingredients;
+    values.exercises = exercises;
     console.log(values);
     resetForm({ values: "" });
     // axios

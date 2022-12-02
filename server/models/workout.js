@@ -9,8 +9,8 @@ module.exports = {
             allowNull: false,
             primaryKey: true
         },
-        title: DataTypes.STRING,
-        content: DataTypes.TEXT,
-        privateStatus: DataTypes.BOOLEAN,
+        name: DataTypes.STRING,
+        description: DataTypes.TEXT,
+        exercises: DataTypes.TEXT,
     })
 }
