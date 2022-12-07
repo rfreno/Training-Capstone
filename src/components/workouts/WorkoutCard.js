@@ -2,8 +2,6 @@ import React from "react";
 import classes from './Workouts.module.css'
 
 const WorkoutCard = (workout) => {
-  console.log('CARD INFO', workout.workout.exercises)
-
     const exerciseList = (workout.workout.exercises)
     // .map(exercise => {
     //     return (
