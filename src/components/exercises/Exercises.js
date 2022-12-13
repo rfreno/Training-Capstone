@@ -13,7 +13,7 @@ const Exercises = () => {
   const [equipFilter, setEquipFilter] = useState(null);
   const [tSelect, setTSelect] = useState(false);
   const [eSelect, setESelect] = useState(false);
-  let perPage = 20;
+  const [perPage, setPerPage] = useState(20);
 
   const equipOptions = [
     { value: "0", label: "assisted" },
@@ -68,15 +68,12 @@ const Exercises = () => {
     { value: "18", label: "upper back" },
   ];
 
-  // function SortArray(x, y) {
-  //   if (x.name < y.name) {
-  //     return -1;
-  //   }
-  //   if (x.name > y.name) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // }
+  const pageOptions = [
+    { value: "0", label: 10 },
+    { value: "1", label: 20 },
+    { value: "2", label: 50 },
+    { value: "3", label: 100 },
+  ];
 
   function filter(arr, criteria) {
     if (criteria.target === null && criteria.equipment === null) {
@@ -113,30 +110,32 @@ const Exercises = () => {
     .map((exercise) => {
       return <ExerciseCard exercise={exercise} />;
     });
-  // .sort(SortArray)
 
   return (
     <div>
+      <div className={classes.flex}>
       <div className={classes.sort_bar}>
         <button
+          className={classes.ex_button}
           onClick={() => {
             if (pageNumber > 1) {
               setPageNumber(pageNumber - 1);
-              setStartNum(startNum + perPage);
+              setStartNum(startNum - perPage);
             }
           }}
         >
           Previous
         </button>
         <p>
-          Page Number: {pageNumber} of{" "}
+          Page {pageNumber} of{" "}
           {Math.ceil(filteredExercises.length / perPage)}
         </p>
         <button
+          className={classes.ex_button}
           onClick={() => {
             if (pageNumber < filteredExercises.length / perPage) {
               setPageNumber(pageNumber + 1);
-              setStartNum(startNum - perPage);
+              setStartNum(startNum + perPage);
             }
           }}
         >
@@ -144,10 +143,16 @@ const Exercises = () => {
         </button>
       </div>
       <div className={classes.sort_bar}>
-        <div className={classes.sort_options}>
-          <button>Grid View </button>
-          <button>List View</button>
-        </div>
+        {/* <div className={classes.sort_options}>
+          <Dropdown
+            placeHolder={pageNumber}
+            options={pageOptions}
+            onChange={(label) => {
+              setPerPage(label.label);
+              console.log(label.label);
+            }}
+          />
+        </div> */}
         <div className={classes.sort_options}>
           <p>filter: </p>
           <Dropdown
@@ -169,6 +174,7 @@ const Exercises = () => {
             clear={eSelect}
           />
           <button
+            className={classes.ex_button}
             onClick={() => {
               setMuscleFilter(null);
               setEquipFilter(null);
@@ -179,6 +185,7 @@ const Exercises = () => {
             Clear Filters
           </button>
         </div>
+        </div>
       </div>
       <div className={classes.exercise_display}>
         {filteredExercises.length > 0 ? (
@@ -186,6 +193,36 @@ const Exercises = () => {
         ) : (
           <p>No exercises match the selected filters</p>
         )}
+      </div>
+      <div className={classes.flex}>
+      <div className={classes.sort_bar}>
+        <button
+          className={classes.ex_button}
+          onClick={() => {
+            if (pageNumber > 1) {
+              setPageNumber(pageNumber - 1);
+              setStartNum(startNum - perPage);
+            }
+          }}
+        >
+          Previous
+        </button>
+        <p>
+          Page {pageNumber} of{" "}
+          {Math.ceil(filteredExercises.length / perPage)}
+        </p>
+        <button
+          className={classes.ex_button}
+          onClick={() => {
+            if (pageNumber < filteredExercises.length / perPage) {
+              setPageNumber(pageNumber + 1);
+              setStartNum(startNum + perPage);
+            }
+          }}
+        >
+          Next
+        </button>
+      </div>
       </div>
     </div>
   );

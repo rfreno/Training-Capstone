@@ -4,16 +4,28 @@ import { Formik } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/authContext";
+import Dropdown from "../exercises/Dropdown";
+import WorkoutModal from "./WorkoutModal";
+
+const allExercises = require("../../db/db_ex.json");
+
+const exerciseOptions = allExercises.exercises.map((exercise) => ({
+  value: `${exercise.name}`,
+  label: `${exercise.name}`,
+  target: `${exercise.target}`,
+  equip: `${exercise.equipment}`,
+  gifURL: `${exercise.gifURL}`,
+}));
 
 const Form = () => {
   const { token, userId } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [exercises, setExercises] = useState([]);
-  const [ex, setEx] = useState("");
-  const [sets, setSets] = useState("");
-  const [reps, setReps] = useState("");
-  const [name, setTitle] = useState("");
+  const [ex, setEx] = useState(null);
+  const [sets, setSets] = useState("sets");
+  const [reps, setReps] = useState("reps");
+  const [show, setShow] = useState(false);
 
   const url = "http://localhost:4005";
 
@@ -21,14 +33,12 @@ const Form = () => {
     type: "",
     name: "",
     description: "",
-    exercises: [],
-    userId
+    exercises: "",
+    userId,
   };
 
-  const onSubmit = (values, { resetForm }) => {
+  const onSubmit = async (values, { resetForm }) => {
     values.exercises = exercises;
-    console.log('onsub', values.exercises)
-    console.log('onsub', exercises)
     resetForm({ values: "" });
     axios
       .post(`${url}/workouts`, values, {
@@ -40,18 +50,20 @@ const Form = () => {
   };
 
   const addExercise = () => {
-    console.log(exercises)
-    setExercises([...exercises, `${ex} - sets ${sets} of ${reps} reps`]);
-    console.log(exercises, { ex, sets, reps })
-    setEx("");
-    setSets("");
-    setReps("");
+    setExercises([
+      ...exercises,
+      `${ex.label} --- ${sets} --- ${reps} --- ${ex.gifURL}`,
+    ]);
+    setEx(null);
+    setSets("sets");
+    setReps("reps");
   };
 
   const showExercises = exercises.map((item) => {
+    let j = item.split("---");
     return (
       <li>
-        {item.ex} - {item.sets} sets of {item.reps} reps
+        · {j[0]} - {j[1]} sets of {j[2]} reps
       </li>
     );
   });
@@ -59,7 +71,8 @@ const Form = () => {
   return (
     <section>
       <div className={classes.form_base}>
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Formik initialValues={initialValues}
+           onSubmit={onSubmit}> 
           {({ values, handleChange, handleSubmit, handleReset }) => (
             <form
               onSubmit={handleSubmit}
@@ -89,54 +102,51 @@ const Form = () => {
                     className={classes.form_r3}
                   ></input>
                 </div>
-
-                <div>
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Add exercises"
-                      name="exercise"
-                      onChange={(evt) => setEx(evt.target.value)}
-                      className={classes.form_r4}
-                    ></input>
-                    <input
-                      type="text"
-                      placeholder="Sets"
-                      name="sets"
-                      onChange={(evt) => setSets(evt.target.value)}
-                    ></input>
-                    <input
-                      type="text"
-                      placeholder="Reps"
-                      name="reps"
-                      onChange={(evt) => setReps(evt.target.value)}
-                    ></input>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={addExercise}
+                <button onClick={() => setShow(true)}>Add Exercises</button>
+                <WorkoutModal
+                  show={show}
+                  onClose={() => setShow(false)}
+                  title="Add Exercises"
                 >
-                  Add Exercise
-                </button>
+                  <div>
+                    <Dropdown
+                      placeHolder="Select exercises from the list below"
+                      options={exerciseOptions}
+                      onChange={(evt) => setEx(evt)}
+                      isSearchable
+                    />
+                    <div>
+                      <input
+                        type="text"
+                        placeholder={sets}
+                        name="sets"
+                        onChange={(evt) => {
+                          setSets(evt.target.value);
+                          // evt.target.value = "";
+                        }}
+                      ></input>
+                      <input
+                        type="text"
+                        placeholder={reps}
+                        name="reps"
+                        onChange={(evt) => {
+                          setReps(evt.target.value);
+                          // evt.target.value = "";
+                        }}
+                      ></input>
+                    </div>
+                  </div>
+                  <button type="button" onClick={addExercise}>
+                    ADD
+                  </button>
+                </WorkoutModal>
 
-                <button className={classes.submit} type="submit">
+                <button className={classes.submit} type="submit" onClick={onSubmit}>
                   SAVE WORKOUT
                 </button>
               </div>
-              {/* add modal to pop up for exercises */}
 
-              {/* <button type="button" onClick={addExercise}>
-                Add Exercise
-              </button> */}
               <div className={classes.form_left}>
-                {/* <textarea
-                  placeholder="Exercises added will show here"
-                  name="instructions"
-                  rows={20}
-                  value={values.instructions}
-                  onChange={handleChange}
-                /> */}
                 <ul>{showExercises}</ul>
               </div>
             </form>

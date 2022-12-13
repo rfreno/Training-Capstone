@@ -6,25 +6,38 @@
 }
 
 .sort_bar {
-    width:80%;
+    width:38%;
     height:50px;
     background-color: #A69CAC;
-    margin-left: 10%;
     margin-top:20px;
     border-radius: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     padding:10px;
     align-items: center;
 }
 
 .sort_options {
     display: inline-flex;
+    align-items: center;
 }
 
-.filter_btn {
-    
+.flex {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;;
+}
+
+.ex_button{
+    height:40px;
+    width:100px;
+    border-radius: 10px;
+    margin:10px;
+    font-size:12px;
+    color: #f1dac4;
+    background-color:#161B33;
+    font-weight: bold;
 }
 
 /* for ExerciseCard - native elements */
@@ -41,6 +54,12 @@ h3,h4 {
     padding:10px;
 }
 
+p {
+    text-transform: uppercase;
+    font-size: large;
+    font-weight:500;
+}
+
 /* for ExerciseCard - custom classes */
 
 .full_card {
@@ -48,22 +67,34 @@ h3,h4 {
     height:400px;
     width:300px;
     color:#F1DAC4;
-    text-align: center;
+    /* text-align: center; */
+    justify-content: center;
     padding:10px;
     margin:20px;
     border-radius: 50px;
+    box-shadow: 5px 5px 10px  grey;
+    text-align: center;
 }
 
 .title_container {
     height:100px;
+    width:300px;
     display: table-cell;
     vertical-align: middle;
+    text-align: center;
 }
 
 .img_container {
     height:200px;
+    border:1px solid #161B33;
+    padding:2px;
 }
 
 .detail_container {
     height:100px;
+}
+
+ul {
+    justify-content: center;
+    text-align: center;
 }

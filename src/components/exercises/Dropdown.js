@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import classes from "./Dropdown.module.css";
 
@@ -10,7 +10,7 @@ const Icon = () => {
   );
 };
 
-const Dropdown = ({ placeHolder, options, onChange, clear }) => {
+const Dropdown = ({ placeHolder, options, onChange, clear, isSearchable }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
 
@@ -28,7 +28,7 @@ const Dropdown = ({ placeHolder, options, onChange, clear }) => {
 
   const getDisplay = () => {
     if (clear === false) {
-      return placeHolder
+      return placeHolder;
     }
     if (selectedValue) {
       return selectedValue.label;
@@ -37,7 +37,7 @@ const Dropdown = ({ placeHolder, options, onChange, clear }) => {
 
   const onItemClick = (opt) => {
     setSelectedValue(opt);
-    onChange(opt)
+    onChange(opt);
   };
 
   const isSelected = (opt) => {
@@ -46,29 +46,57 @@ const Dropdown = ({ placeHolder, options, onChange, clear }) => {
     }
     return selectedValue.value === opt.value;
   };
+  const [searchValue, setSearchValue] = useState("");
+  const searchRef = useRef();
+  useEffect(() => {
+    setSearchValue("");
+    if (showMenu && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [showMenu]);
+
+  const onSearch = (e) => {
+    setSearchValue(e.target.value);
+  };
+  const getOptions = () => {
+    if (!searchValue) {
+      return options;
+    }
+    return options.filter(
+      (option) =>
+        option.label.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0
+    );
+  };
 
   return (
     <div className={classes.dropdown_container}>
       <div onClick={handleInputClick} className={classes.dropdown_input}>
         {showMenu && (
           <div className={classes.dropdown_menu}>
+            {isSearchable && (
+              <div className="search-box">
+                <input
+                  onChange={onSearch}
+                  value={searchValue}
+                  ref={searchRef}
+                />
+              </div>
+            )}
             {options.map((option) => (
               <div
                 onClick={() => onItemClick(option)}
                 key={option.value}
-                className={`${classes.dropdown_item} ${isSelected(option) && "selected"}`}
+                className={`${classes.dropdown_item} ${
+                  isSelected(option) && "selected"
+                }`}
               >
                 {option.label}{" "}
               </div>
             ))}
           </div>
         )}
-
-        {/* className={classes.dropdown-selected-value} */}
+        <div className={classes.shown}>
         <div>{getDisplay()}</div>
-        {/* className={classes.dropdown-tools} */}
-        <div>
-          {/* className={classes.dropdown-tool} */}
           <div>
             <Icon />
           </div>

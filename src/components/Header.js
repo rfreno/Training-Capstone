@@ -35,13 +35,16 @@ const Header = () => {
               <NavLink className="nav-btn" style={styleActiveLink} to="/form">
                 CREATE WORKOUT
               </NavLink>
-              {/* <NavLink
+              <NavLink
                 className="nav-btn"
                 style={styleActiveLink}
                 to="/profile"
               >
                 PROFILE
-              </NavLink> */}
+              </NavLink>
+              <NavLink className="nav-btn" style={styleActiveLink} to="/auth" onClick={()=>authCtx.logout()}>
+                LOGOUT
+              </NavLink>
             </ul>
           ) : (
             <ul className="main-nav">
