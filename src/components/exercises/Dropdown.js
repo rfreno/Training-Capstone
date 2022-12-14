@@ -14,6 +14,15 @@ const Dropdown = ({ placeHolder, options, onChange, clear, isSearchable }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
 
+  const [searchValue, setSearchValue] = useState("");
+  const searchRef = useRef();
+  useEffect(() => {
+    setSearchValue("");
+    if (showMenu && searchRef.current) {
+      searchRef.current.focus();
+    }
+  }, [showMenu]);
+
   useEffect(() => {
     const handler = () => setShowMenu(false);
     window.addEventListener("click", handler);
@@ -21,6 +30,7 @@ const Dropdown = ({ placeHolder, options, onChange, clear, isSearchable }) => {
       window.removeEventListener("click", handler);
     };
   });
+
   const handleInputClick = (evt) => {
     evt.stopPropagation();
     setShowMenu(!showMenu);
@@ -46,18 +56,12 @@ const Dropdown = ({ placeHolder, options, onChange, clear, isSearchable }) => {
     }
     return selectedValue.value === opt.value;
   };
-  const [searchValue, setSearchValue] = useState("");
-  const searchRef = useRef();
-  useEffect(() => {
-    setSearchValue("");
-    if (showMenu && searchRef.current) {
-      searchRef.current.focus();
-    }
-  }, [showMenu]);
+
 
   const onSearch = (e) => {
     setSearchValue(e.target.value);
   };
+
   const getOptions = () => {
     if (!searchValue) {
       return options;
@@ -82,7 +86,7 @@ const Dropdown = ({ placeHolder, options, onChange, clear, isSearchable }) => {
                 />
               </div>
             )}
-            {options.map((option) => (
+            {getOptions().map((option) => (
               <div
                 onClick={() => onItemClick(option)}
                 key={option.value}

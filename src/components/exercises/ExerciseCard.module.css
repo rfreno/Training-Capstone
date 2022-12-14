@@ -1,100 +1,103 @@
 /* for Exercises */
 .exercise_display {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .sort_bar {
-    width:38%;
-    height:50px;
-    background-color: #A69CAC;
-    margin-top:20px;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    padding:10px;
-    align-items: center;
+  width: 38%;
+  height: 50px;
+  background-color: #a69cac;
+  margin-top: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center;
 }
 
 .sort_options {
-    display: inline-flex;
-    align-items: center;
+  display: inline-flex;
+  align-items: center;
 }
 
 .flex {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
 }
 
-.ex_button{
-    height:40px;
-    width:100px;
-    border-radius: 10px;
-    margin:10px;
-    font-size:12px;
-    color: #f1dac4;
-    background-color:#161B33;
-    font-weight: bold;
+.ex_button {
+  height: 40px;
+  width: 100px;
+  border-radius: 10px;
+  margin: 10px;
+  font-size: 12px;
+  color: #f1dac4;
+  background-color: #161b33;
+  font-weight: bold;
 }
 
 /* for ExerciseCard - native elements */
 
 img {
-    height:180px;
-    padding:10px;
-    border-radius: 50px;
+  height: 180px;
+  padding: 10px;
+  border-radius: 50px;
 }
 
-h3,h4 {
-    text-transform: uppercase;
-    font-family:sans-serif;
-    padding:10px;
+h3,
+h4 {
+  text-transform: uppercase;
+  font-family: sans-serif;
+  padding: 10px;
 }
 
 p {
-    text-transform: uppercase;
-    font-size: large;
-    font-weight:500;
+  text-transform: uppercase;
+  font-size: large;
+  font-weight: 500;
 }
 
 /* for ExerciseCard - custom classes */
 
 .full_card {
-    background-color: #161B33;
-    height:400px;
-    width:300px;
-    color:#F1DAC4;
-    /* text-align: center; */
-    justify-content: center;
-    padding:10px;
-    margin:20px;
-    border-radius: 50px;
-    box-shadow: 5px 5px 10px  grey;
-    text-align: center;
+  background-color: #161b33;
+  height: 400px;
+  width: 300px;
+  color: #f1dac4;
+  /* text-align: center; */
+  justify-content: center;
+  padding: 10px;
+  margin: 20px;
+  border-radius: 50px;
+  box-shadow: 5px 5px 10px grey;
+  text-align: center;
 }
 
 .title_container {
-    height:100px;
-    width:300px;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
+  height: 100px;
+  width: 300px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .img_container {
-    height:200px;
-    border:1px solid #161B33;
-    padding:2px;
+  height: 200px;
+  border: 1px solid #161b33;
+  padding: 2px;
 }
 
 .detail_container {
-    height:100px;
+  height: 100px;
 }
 
 ul {
-    justify-content: center;
-    text-align: center;
+  justify-content: center;
+  text-align: center;
 }

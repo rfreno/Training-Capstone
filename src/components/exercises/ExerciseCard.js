@@ -14,7 +14,6 @@ const ExerciseCard = (exercise) => {
         <h4>Target: {exercise.exercise.target}</h4>
         <h4>Equipment Used: {exercise.exercise.equipment}</h4>
       </div>
-      {/* Add Button (add to workout ? ) */}
     </div>
   );
 };

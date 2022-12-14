@@ -26,6 +26,7 @@ const Form = () => {
   const [sets, setSets] = useState("sets");
   const [reps, setReps] = useState("reps");
   const [show, setShow] = useState(false);
+  const [username, setUsername] = useState("");
 
   const url = "http://localhost:4005";
 
@@ -34,10 +35,11 @@ const Form = () => {
     name: "",
     description: "",
     exercises: "",
-    userId,
+    username:"",
   };
 
-  const onSubmit = async (values, { resetForm }) => {
+  const onSubmit = (values,  {resetForm} ) => {
+
     values.exercises = exercises;
     resetForm({ values: "" });
     axios
@@ -46,7 +48,10 @@ const Form = () => {
           authorization: token,
         },
       })
-      .then(navigate(`${url}/`));
+      .then((res) => {
+        console.log(res)
+        navigate(`${url}/`)}
+        );
   };
 
   const addExercise = () => {
@@ -57,13 +62,14 @@ const Form = () => {
     setEx(null);
     setSets("sets");
     setReps("reps");
+    setShow(false)
   };
 
   const showExercises = exercises.map((item) => {
     let j = item.split("---");
     return (
       <li>
-        · {j[0]} - {j[1]} sets of {j[2]} reps
+        ◆ {j[0]} - {j[1]} sets of {j[2]} reps
       </li>
     );
   });
@@ -71,39 +77,9 @@ const Form = () => {
   return (
     <section>
       <div className={classes.form_base}>
-        <Formik initialValues={initialValues}
-           onSubmit={onSubmit}> 
-          {({ values, handleChange, handleSubmit, handleReset }) => (
-            <form
-              onSubmit={handleSubmit}
-              onReset={handleReset}
-              className={classes.form_layout}
-            >
-              <div className={classes.form_right}>
-                <h1 className={classes.form_r1}>NEW WORKOUT</h1>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="workout name"
-                    name="name"
-                    value={values.name}
-                    onChange={handleChange}
-                    className={classes.form_r2}
-                  ></input>
-                </div>
 
-                <div>
-                  <input
-                    type="text"
-                    placeholder="description & notes"
-                    name="description"
-                    value={values.description}
-                    onChange={handleChange}
-                    className={classes.form_r3}
-                  ></input>
-                </div>
-                <button onClick={() => setShow(true)}>Add Exercises</button>
-                <WorkoutModal
+
+      <WorkoutModal
                   show={show}
                   onClose={() => setShow(false)}
                   title="Add Exercises"
@@ -122,7 +98,6 @@ const Form = () => {
                         name="sets"
                         onChange={(evt) => {
                           setSets(evt.target.value);
-                          // evt.target.value = "";
                         }}
                       ></input>
                       <input
@@ -131,27 +106,73 @@ const Form = () => {
                         name="reps"
                         onChange={(evt) => {
                           setReps(evt.target.value);
-                          // evt.target.value = "";
                         }}
                       ></input>
                     </div>
                   </div>
-                  <button type="button" onClick={addExercise}>
+                  <button type="button" onClick={addExercise} className={classes.detail_btn}>
                     ADD
                   </button>
                 </WorkoutModal>
 
+        <Formik initialValues={initialValues} 
+            onSubmit={onSubmit}> 
+          {({ values, handleChange, handleSubmit, handleReset }) => (
+            <form
+              onSubmit={handleSubmit}
+              onReset={handleReset}
+              className={classes.form_layout}
+            >
+              <div >
+                <h1 className={classes.form_r2}>NEW WORKOUT</h1>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="workout name"
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                    className={classes.form_r2}
+                  ></input>
+                  <input
+                    type="text"
+                    placeholder="creator name"
+                    name="username"
+                    value={values.username}
+                    onChange={handleChange}
+                    className={classes.form_r2}
+                  ></input>
+                </div>
+
+                <div className={classes.form_r3}>
+                  <input
+                    type="text"
+                    placeholder="description & notes"
+                    name="description"
+                    value={values.description}
+                    onChange={handleChange}
+                    
+                  ></input>
                 <button className={classes.submit} type="submit" onClick={onSubmit}>
                   SAVE WORKOUT
                 </button>
+                </div>
+  
+
               </div>
 
-              <div className={classes.form_left}>
-                <ul>{showExercises}</ul>
-              </div>
+
             </form>
           )}
         </Formik>
+
+
+
+        <div className={classes.form_left}>
+        <button className={classes.add} onClick={() => setShow(true)}>Add Exercises</button>
+                <ul className={classes.list}>{showExercises}</ul>
+              </div>
+
       </div>
     </section>
   );

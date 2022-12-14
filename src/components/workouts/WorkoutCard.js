@@ -11,7 +11,9 @@ const WorkoutCard = (workout) => {
     let j = i.split("---");
     return (
       <li>
-        <p>· {j[0]} - {j[1]} sets of {j[2]} reps</p>
+        <p className={classes.card_p}>
+          ◆ {j[0]} - {j[1]} sets of {j[2]} reps
+        </p>
       </li>
     );
   });
@@ -19,44 +21,47 @@ const WorkoutCard = (workout) => {
     let j = i.split("---");
     return (
       <li>
-        <p>· {j[0]} - {j[1]} sets of {j[2]} reps</p>
-        <img src={j[3]}></img>
+        <div className={classes.ex_img}>
+        <p className={classes.modal_list}>
+          ◆ {j[0]} - {j[1]} sets of {j[2]} reps
+        </p>
+          <img src={j[3]}></img>
+        </div>
       </li>
     );
   });
 
   return (
     <div className={classes.work_display}>
-    <div className={classes.work_card}>
-      <div className={classes.work_title}>
-        <h3>{workout.workout.name}</h3>
-        <p>Created by {workout.workout.user.username}</p>
+      <div className={classes.work_card}>
+        <div className={classes.work_title}>
+          <h1>{workout.workout.name}</h1>
+          <p className={classes.card_p}>
+            Created by {workout.workout.username}
+          </p>
+        </div>
+        <div className={classes.detail_container}>
+          <h5>DESCRIPTION: {workout.workout.description}</h5>
+          <ul className={classes.list}>{exerciseList}</ul>
+        </div>
+        <div className={classes.card_base}>
+          <button className={classes.detail_btn} onClick={() => setShow(true)}>
+            See Details
+          </button>
+        </div>
+        <WorkoutModal
+          show={show}
+          onClose={() => setShow(false)}
+          title={workout.workout.name}
+        >
+          <h5>DESCRIPTION: {workout.workout.description}</h5>
+          <div className={classes.card_base}>
+            <ul className={classes.modal_list}>{imgList}</ul>
+          </div>
+        </WorkoutModal>
       </div>
-      <div className={classes.detail_container}>
-        <h4 className={classes.desc}>
-          Workout Description: 
-        </h4>
-        <p>{workout.workout.description}</p>
-        <ul className={classes.list}>{exerciseList}</ul>
-      </div>
-      <button className={classes.detail_btn} onClick={() => setShow(true)}>
-        See Details
-      </button>
-      <WorkoutModal
-        show={show}
-        onClose={() => setShow(false)}
-        title={workout.workout.name}
-      >
-        <h3 >
-          DESCRIPTION: {workout.workout.description}
-        </h3>
-        <ul>{imgList}</ul>
-      </WorkoutModal>
-    </div>
     </div>
   );
 };
 
 export default WorkoutCard;
-
-// title, userId, desc, exercises

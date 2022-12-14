@@ -25,7 +25,7 @@ const Auth = () => {
         authCtx.login(res.data.token, res.data.exp, res.data.userId)
       })
       .catch((error) => {
-        console.log('error in post', error)
+        console.log('error in log/reg post', error)
         setUsername("");
         setPassword("");
       });
